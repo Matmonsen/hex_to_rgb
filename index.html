@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <title>Color converter</title>
+</head>
+<body>
+    <main>
+        <div class="upper">
+            <div id="leftDiv" style="display: none">
+                <button id="leftButton" type="button" onclick="leftButtonClick(this)">Copy</button>
+            </div>
+
+            <div id="rightDiv" style="display: none">
+                <button id="rightButton" type="button" onclick="rightButtonClick(this)">Copy</button>
+            </div>
+        </div>
+        <div class="lower">
+            <input id="input" type="text" placeholder="#xxx #xxxxxx (x,x,x) rgb(x,x,x) x,x,x">
+        </div>
+
+    </main>
+
+
+    <script>
+        var rightCopyValue = "";
+        var leftCopyValue = "";
+
+        /**
+         * User click for copying the right text
+         */
+        function rightButtonClick(elm) {
+            if (document.queryCommandSupported('copy')) {
+                ColorConverter.Utils.copy(rightCopyValue);
+            }
+        }
+
+        /**
+         * User click for copying the left text
+         */
+        function leftButtonClick(elm) {
+            if (document.queryCommandSupported('copy')) {
+                ColorConverter.Utils.copy(leftCopyValue);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var leftDiv = document.getElementById('leftDiv');
+            var rightDiv = document.getElementById('rightDiv');
+            var input = document.getElementById('input');
+            var leftButton = document.getElementById('leftButton');
+            var rightButton = document.getElementById('rightButton');
+
+            input.addEventListener('input', setColor)
+
+            // Sets the background color of body, and buttons,
+            // and the text color of all
+            function setColor(e) {
+                var color = ColorConverter.convert(e.target.value);
+
+                if (color.out_left === '') {
+                    leftDiv.style.display = "none";
+                } else {
+                    leftCopyValue  = color.out_left;
+                    leftDiv.style.display = "flex";
+                    leftButton.setAttribute("style", "background: " + color.textColor + "; color: " + color.background + ";");
+                    leftButton.innerHTML = leftCopyValue;
+                }
+
+
+                if (color.out_right === '') {
+                    rightDiv.style.display = "none";
+                } else {
+                    rightCopyValue  = color.out_right;
+                    rightDiv.style.display = "flex";
+                    rightButton.setAttribute("style", "background: " + color.textColor + "; color: " + color.background + ";");
+                    rightButton.innerHTML = rightCopyValue;
+                }
+
+                document.body.setAttribute("style", "background: " + color.background + "; color: " + color.textColor + ";");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
