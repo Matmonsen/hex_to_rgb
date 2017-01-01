@@ -11,20 +11,18 @@
 <body>
     <main>
         <div class="upper">
-            <div id="leftDiv" style="display: none">
-                <button id="leftButton" type="button" onclick="leftButtonClick(this)">Copy</button>
-            </div>
-
-            <div id="rightDiv" style="display: none">
-                <button id="rightButton" type="button" onclick="rightButtonClick(this)">Copy</button>
-            </div>
+            <h1 id="title">Color converter</h1>
+                <button id="leftButton" type="button" onclick="leftButtonClick(this)" style="display: none">Copy</button>
+                <button id="rightButton" type="button" onclick="rightButtonClick(this)" style="display: none">Copy</button>
         </div>
         <div class="lower">
-            <input id="input" type="text" placeholder="#xxx #xxxxxx (x,x,x) rgb(x,x,x) x,x,x">
+            <input id="input" type="text" placeholder="hex, rgb or a html colorname">
+            <p id="explainText">
+                Hex: xxx, xxxxxx, #xxx, #xxxxxx. \nRgb: rgb(x,x,x), (x,x,x), x,x,x)
+            </p>
         </div>
 
     </main>
-
 
     <script>
         var rightCopyValue = "";
@@ -49,11 +47,18 @@
         }
 
         document.addEventListener("DOMContentLoaded", function(event) {
-            var leftDiv = document.getElementById('leftDiv');
-            var rightDiv = document.getElementById('rightDiv');
             var input = document.getElementById('input');
             var leftButton = document.getElementById('leftButton');
             var rightButton = document.getElementById('rightButton');
+            var title = document.getElementById('title');
+            var explainText = document.getElementById('explainText');
+
+
+            var copyExplain = 'Copy the hex, rgb or colorname by pressing the button(s)';
+            var inputExplain = 'Hex: xxx, xxxxxx, #xxx, #xxxxxx. <br>Rgb: rgb(x,x,x), (x,x,x), x,x,x';
+
+            explainText.innerHTML = inputExplain;
+
 
             input.addEventListener('input', setColor)
 
@@ -61,33 +66,37 @@
             // and the text color of all
             function setColor(e) {
                 var color = ColorConverter.convert(e.target.value);
-
+                console.log(color);
                 if (color.out_left === '') {
-                    leftDiv.style.display = "none";
+                    leftButton.style.display = "none";
+                    explainText.innerHTML = inputExplain;
                 } else {
+                    explainText.innerHTML = copyExplain;
                     leftCopyValue  = color.out_left;
-                    leftDiv.style.display = "flex";
+                    leftButton.style.display = "flex";
                     leftButton.setAttribute("style", "background: " + color.textColor + "; color: " + color.background + ";");
                     leftButton.innerHTML = leftCopyValue;
                 }
 
 
                 if (color.out_right === '') {
-                    rightDiv.style.display = "none";
+                    rightButton.style.display = "none";
+                    explainText.innerHTML = inputExplain;
                 } else {
+                    explainText.innerHTML = copyExplain;
                     rightCopyValue  = color.out_right;
-                    rightDiv.style.display = "flex";
+                    rightButton.style.display = "flex";
                     rightButton.setAttribute("style", "background: " + color.textColor + "; color: " + color.background + ";");
                     rightButton.innerHTML = rightCopyValue;
                 }
 
+                title.setAttribute("style", "color: " + color.textColor + ";");
                 document.body.setAttribute("style", "background: " + color.background + "; color: " + color.textColor + ";");
             }
         });
     </script>
 </body>
 </html>
-
 
 
 

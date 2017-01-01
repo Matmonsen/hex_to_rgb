@@ -19,14 +19,14 @@ function whichTextColor(r,g,b) {
 
 /**
  * Checks which kind of input the user is typing
- * # or xxx or xxxxxx or #xxx or #xxxxxx is hex
+ * xxx or xxxxxx or #xxx or #xxxxxx is hex
  * rgb(x,x,x) or x,x,x or (x,x,x)  is rgb
  * @param input
  * @returns {*}
  */
 function whatIsInput(input) {
     let type = null;
-    if (input.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i) !== null) {
+    if (input.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i) !== null) {
         type = 'hex';
     } else if (input.match(/rgb\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i)
         || input.match(/\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i)
@@ -45,13 +45,13 @@ function whatIsInput(input) {
  * @returns {*}
  */
 function convert(input) {
+    let color = {input: '', out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
 
     if (typeof input === 'undefined') {
-        return {input: '', out_left: '', out_right: '', textColor: setTextColer(), background: DefaultBackgroundColor};
+        return color;
     }
 
     let trimmed = input.trim();
-    let color = null;
     let type = whatIsInput(trimmed);
     switch (type) {
         case 'hex':
@@ -91,7 +91,7 @@ function name(input) {
     let index = ColorNames.indexOf(input.toLowerCase());
 
     if (index === -1) {
-        return {input: input, out_left: '', out_right: ''};
+        return {input: '', out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
     }
 
     let name = ColorNames[index];
@@ -99,12 +99,9 @@ function name(input) {
     let rgb = hex_to_rgb(hex);
 
     let background = hex === '' ? DefaultBackgroundColor : hex;
-
-    return {input: name, out_left: hex, out_right: rgb, textColor: setTextColer(rgb), background: background};
-
+    let textColor = rgb === '' ?  DefaultTextColor :  setTextColer(rgb);
+    return {input: name, out_left: hex, out_right: rgb, textColor: textColor, background: background};
 }
-
-
 
 /**
  * Converts a rgb color to hex and color name
@@ -136,9 +133,10 @@ function rgb(input) {
             background = `rgb(${background})`;
         }
 
-        return {input: input, out_left: hex, out_right: name, textColor: setTextColer(input), background: background};
+        let textColor = input === '' ?  DefaultTextColor :  setTextColer(input);
+        return {input: input, out_left: hex, out_right: name, textColor: textColor, background: background};
     }
-    return {input: input, out_left: '', out_right: '', textColor: setTextColer(), background: DefaultBackgroundColor};
+    return {input: input, out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
 }
 
 /**
@@ -166,11 +164,10 @@ function hex(input) {
     if (!long_hex.startsWith('#')) {
         long_hex = `#${long_hex}`;
     }
-
     let background = long_hex === '' ? DefaultBackgroundColor : long_hex;
-
-    console.log('Hex', background)
-    return {input: long_hex, out_left: name, out_right: rgb,textColor: setTextColer(rgb), background: background};
+    let textColor = rgb === '' ?  DefaultTextColor :  setTextColer(rgb);
+    console.log(rgb === '', rgb)
+    return {input: long_hex, out_left: name, out_right: rgb,textColor: textColor, background: background};
 }
 
 /**
@@ -182,8 +179,8 @@ function hex_to_rgb(long_hex) {
     // Splits hex into [long_hex, first_char_group, _second_char_group, third_char_group]
     // ex long_hex = #e1f134 -> [#e1f134, e1, f1, 34]
     let rgb_exists = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(long_hex);
-    return rgb_exists ?
-    'rgb(' + parseInt(rgb_exists[1], 16) + ', ' + parseInt(rgb_exists[2], 16) + ', ' + parseInt(rgb_exists[3], 16) + ')'
+    return rgb_exists
+        ? `rgb(${parseInt(rgb_exists[1], 16)}, ${parseInt(rgb_exists[2], 16)}, ${parseInt(rgb_exists[3], 16)})`
         : '';
 }
 

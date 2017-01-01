@@ -1,9 +1,33 @@
+$break-xs: 480px;
+$break-sm: 960px;
+$break-md: 1280px;
+
+
+@mixin respond-to($media) {
+    @if $media == xs {
+        @media only screen and (max-width: $break-xs) { @content; }
+    }
+    @else if $media == sm {
+        @media only screen and (min-width: $break-xs) and (max-width: $break-sm) { @content; }
+    }
+    @else if $media == md {
+        @media only screen and (min-width: $break-sm) and (max-width: $break-md) { @content; }
+    }
+    @else if $media == lg {
+        @media only screen and (min-width: $break-md) { @content; }
+    }
+}
+
+
+
 html, body, main {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
+h1 {
+    color: white;
+}
 main {
     display: flex;
     flex-direction: column;
@@ -35,8 +59,8 @@ body {
 input {
     height: 50px;
     width: 300px;
-
     font-size: 20px;
+    text-align: center;
 }
 
 button {
@@ -46,4 +70,23 @@ button {
     border-radius: 5px;
     font-size: 20px;
     padding: 50px;
+
+}
+
+@include respond-to(xs) {
+    p {
+        text-align: center;
+    }
+    button {
+        padding: 40px;
+    }
+    button, input, p {
+        width: 90%;
+    }
+    .upper {
+        flex-direction: column;
+    }
+    .lower {
+        justify-content: space-around;
+    }
 }
