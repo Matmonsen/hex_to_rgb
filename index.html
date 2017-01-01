@@ -12,8 +12,10 @@
     <main>
         <div class="upper">
             <h1 id="title">Color converter</h1>
-                <button id="leftButton" type="button" onclick="leftButtonClick(this)" style="display: none">Copy</button>
-                <button id="rightButton" type="button" onclick="rightButtonClick(this)" style="display: none">Copy</button>
+                <div id="buttons" style="display: none">
+                    <button id="leftButton" type="button" onclick="leftButtonClick(this)">Copy</button>
+                    <button id="rightButton" type="button" onclick="rightButtonClick(this)">Copy</button>
+                </div>
         </div>
         <div class="lower">
             <input id="input" type="text" placeholder="hex, rgb or a html colorname">
@@ -52,6 +54,7 @@
             var rightButton = document.getElementById('rightButton');
             var title = document.getElementById('title');
             var explainText = document.getElementById('explainText');
+            var buttons = document.getElementById('buttons');
 
 
             var copyExplain = 'Copy the hex, rgb or colorname by pressing the button(s)';
@@ -66,7 +69,7 @@
             // and the text color of all
             function setColor(e) {
                 var color = ColorConverter.convert(e.target.value);
-                console.log(color);
+
                 if (color.out_left === '') {
                     leftButton.style.display = "none";
                     explainText.innerHTML = inputExplain;
@@ -74,6 +77,7 @@
                     explainText.innerHTML = copyExplain;
                     leftCopyValue  = color.out_left;
                     leftButton.style.display = "flex";
+                    buttons.style.display = "flex";
                     leftButton.setAttribute("style", "background: " + color.textColor + "; color: " + color.background + ";");
                     leftButton.innerHTML = leftCopyValue;
                 }
@@ -86,6 +90,7 @@
                     explainText.innerHTML = copyExplain;
                     rightCopyValue  = color.out_right;
                     rightButton.style.display = "flex";
+                    buttons.style.display = "flex";
                     rightButton.setAttribute("style", "background: " + color.textColor + "; color: " + color.background + ";");
                     rightButton.innerHTML = rightCopyValue;
                 }

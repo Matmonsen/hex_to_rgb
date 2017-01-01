@@ -35,6 +35,15 @@ main {
     justify-content:center;
 }
 
+#buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+}
+
 .upper {
     display: flex;
     flex: 1;
@@ -90,3 +99,25 @@ button {
         justify-content: space-around;
     }
 }
+@include respond-to(sm) {
+    p {
+        text-align: center;
+    }
+    button {
+        padding: 60px;
+    }
+    input {
+        height: 80px;
+    }
+    button, input, p {
+        width: 90%;
+    }
+    .upper {
+        flex-direction: column;
+    }
+    .lower {
+        justify-content: space-around;
+    }
+}
+
+
