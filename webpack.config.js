@@ -24,7 +24,7 @@ if (env === 'build') {
 }
 
 const config = {
-    entry: path.resolve(__dirname, 'src/converter.js'),
+    entry: path.resolve(__dirname, 'src/app.js'),
     devtool: 'source-map',
     devServer: {
         historyApiFallback: true,

@@ -1,12 +1,11 @@
-import './style.scss';
 import {ColorHexNames, ColorNames, DefaultBackgroundColor, DefaultTextColor} from './constants';
 import Utils from './utils';
 
 /**
  * Figures out if white or black text is best with the specific background color
- * @param r
- * @param g
- * @param b
+ * @param r Red color value
+ * @param g Green color value
+ * @param b Blue color value
  * @returns {*}
  */
 function whichTextColor(r,g,b) {
@@ -14,14 +13,14 @@ function whichTextColor(r,g,b) {
     let threshold = 105;
     let delta = parseInt((r * 0.299) + (g * 0.587) + (b * 0.114));
 
-    return (255 - delta < threshold) ? '#000000' : '#ffffff';
+    return (255 - delta < threshold) ? DefaultBackgroundColor : DefaultTextColor;
 }
 
 /**
  * Checks which kind of input the user is typing
  * xxx or xxxxxx or #xxx or #xxxxxx is hex
  * rgb(x,x,x) or x,x,x or (x,x,x)  is rgb
- * @param input
+ * @param input User input
  * @returns {*}
  */
 function whatIsInput(input) {
@@ -41,7 +40,7 @@ function whatIsInput(input) {
 
 /**
  * * Converts the ipnut to two output and changes background color
- * @param input
+ * @param input User input
  * @returns {*}
  */
 function convert(input) {
@@ -69,7 +68,7 @@ function convert(input) {
 
 /**
  * Sets the text color based on an rgb
- * @param rgb
+ * @param rgb color formatted as rgb(x,y,z)
  * @returns {string}
  */
 function setTextColer(rgb = '') {
@@ -84,7 +83,7 @@ function setTextColer(rgb = '') {
 
 /**
  * Converts a html named color to hex and rgb
- * @param input
+ * @param input User input
  * @returns {*}
  */
 function name(input) {
@@ -105,7 +104,7 @@ function name(input) {
 
 /**
  * Converts a rgb color to hex and color name
- * @param input
+ * @param input User input
  * @returns {*}
  */
 function rgb(input) {
@@ -122,26 +121,20 @@ function rgb(input) {
         // Bit shifts all values to numbers
         let hex = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
-        let indexOfColor = ColorHexNames.indexOf(hex.toUpperCase());
-        let name = '';
-        if (indexOfColor > -1) {
-            name = ColorNames[indexOfColor];
-        }
-
         let background = input;
         if (background.indexOf('rgb') === -1) {
             background = `rgb(${background})`;
         }
 
         let textColor = input === '' ?  DefaultTextColor :  setTextColer(input);
-        return {input: input, out_left: hex, out_right: name, textColor: textColor, background: background};
+        return {input: input, out_left: hex, out_right: rgb, textColor: textColor, background: background};
     }
     return {input: input, out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
 }
 
 /**
  * Converts hex to rgb and color name
- * @param input
+ * @param input User input
  * @returns {*}
  */
 function hex(input) {
@@ -152,22 +145,14 @@ function hex(input) {
     });
 
     let rgb = hex_to_rgb(long_hex);
-    let name = '';
 
-    if (rgb !== '') {
-        let indexOfColor = ColorHexNames.indexOf(long_hex.toUpperCase());
-
-        if (indexOfColor > -1) {
-            name = ColorNames[indexOfColor];
-        }
-    }
     if (!long_hex.startsWith('#')) {
         long_hex = `#${long_hex}`;
     }
     let background = long_hex === '' ? DefaultBackgroundColor : long_hex;
     let textColor = rgb === '' ?  DefaultTextColor :  setTextColer(rgb);
-    console.log(rgb === '', rgb)
-    return {input: long_hex, out_left: name, out_right: rgb,textColor: textColor, background: background};
+
+    return {input: long_hex, out_left: long_hex, out_right: rgb, textColor: textColor, background: background};
 }
 
 /**

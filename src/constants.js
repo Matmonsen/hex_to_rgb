@@ -288,3 +288,5 @@ export const ColorHexNames = [
 
 export const DefaultBackgroundColor = '#22282b';
 export const DefaultTextColor = '#ffffff';
+export const CopyExplainText = 'Copy the hex, rgb or colorname by pressing the button(s)';
+export const InputExplainText = 'Valid formats<br>Hex: xxx, xxxxxx, #xxx, #xxxxxx. <br>Rgb: rgb(x,x,x), (x,x,x), x,x,x<br> Html colornames: ex (hotpink)';
