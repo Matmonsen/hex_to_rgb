@@ -3,6 +3,8 @@ import ColorConverter from './converter';
 import {CopyExplainText, InputExplainText} from './constants';
 
 document.addEventListener('DOMContentLoaded', function(event) {
+
+
     let input = document.getElementById('input');
     let leftButton = document.getElementById('leftButton');
     let rightButton = document.getElementById('rightButton');
@@ -31,32 +33,29 @@ document.addEventListener('DOMContentLoaded', function(event) {
     function setColor(e) {
         let color = ColorConverter.convert(e.target.value);
 
-        if (color.out_left === '') {
+        console.log(color)
+        if (color.hex === '' && color.rgb === '') {
             buttons.style.display = 'none';
             explainText.innerHTML = InputExplainText;
         } else {
             explainText.innerHTML = CopyExplainText;
-            leftCopyValue  = color.out_left;
+
+            leftCopyValue  = color.hex;
             buttons.style.display = 'flex';
-            leftButton.setAttribute('style', 'background: ' + color.textColor + '; color: ' + color.background + ';');
+
+            let buttonStyle = `background: ${color.textColor}; color: ${color.background};`;
+
+            leftButton.setAttribute('style', buttonStyle);
             leftButton.innerHTML = leftCopyValue;
-            input.setAttribute('style', 'border-color: ' + color.textColor + ';');
-        }
 
-        if (color.out_right === '') {
-            buttons.style.display = 'none';
-            explainText.innerHTML = InputExplainText;
-        } else {
-            explainText.innerHTML = CopyExplainText;
-            rightCopyValue  = color.out_right;
+            rightCopyValue  = color.rgb;
             buttons.style.display = 'flex';
-            rightButton.setAttribute('style', 'background: ' + color.textColor + '; color: ' + color.background + ';');
+            rightButton.setAttribute('style', buttonStyle);
             rightButton.innerHTML = rightCopyValue;
-            input.setAttribute('style', 'border-color: ' + color.textColor + ';');
         }
 
-        title.setAttribute('style', 'color: ' + color.textColor + ';');
-        document.body.setAttribute('style', 'background: ' + color.background + '; color: ' + color.textColor + ';');
+        title.setAttribute('style', `color: ${color.textColor};`);
+        document.body.setAttribute('style', `background: ${color.background}; color: ${color.textColor};`);
     }
 
     /**

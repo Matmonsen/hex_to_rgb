@@ -1,4 +1,4 @@
-import {ColorHexNames, ColorNames, DefaultBackgroundColor, DefaultTextColor} from './constants';
+import {ColorHexNames, ColorNames, DefaultBackgroundColor, DefaultTextColor, GoogleAnalyticsKeys} from './constants';
 import Utils from './utils';
 
 /**
@@ -25,11 +25,13 @@ function whichTextColor(r,g,b) {
  */
 function whatIsInput(input) {
     let type = null;
-    if (input.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i) !== null) {
+    if (input.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i) !== null
+        && (input.length === 3 || input.length === 6 || input.length === 4 || input.length === 7)) {
         type = 'hex';
-    } else if (input.match(/rgb\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i)
-        || input.match(/\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i)
-        || input.match(/[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}$/i)) {
+    } else if (input.match(/rgb\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i) !== null
+        || input.match(/rgb\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}$/i) !== null
+        || input.match(/\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i) !== null
+        || input.match(/[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}$/i) !== null) {
         type = 'rgb';
     } else {
         type = 'name';
@@ -44,7 +46,7 @@ function whatIsInput(input) {
  * @returns {*}
  */
 function convert(input) {
-    let color = {input: '', out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
+    let color = { hex: '', rgb: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
 
     if (typeof input === 'undefined') {
         return color;
@@ -55,12 +57,30 @@ function convert(input) {
     switch (type) {
         case 'hex':
             color = hex(trimmed);
+            if (color.hex !== '' && color.rgb != '') {
+                Utils.sendGoogleAnalyticsEvent(
+                    GoogleAnalyticsKeys.ConvertFromHex.category,
+                    GoogleAnalyticsKeys.ConvertFromHex.action,
+                    color.hex);
+            }
             break;
          case 'rgb':
              color = rgb(trimmed);
+             if (color.hex !== '' && color.rgb != '') {
+                 Utils.sendGoogleAnalyticsEvent(
+                     GoogleAnalyticsKeys.ConvertFromRgb.category,
+                     GoogleAnalyticsKeys.ConvertFromRgb.action,
+                     color.rgb);
+             }
             break;
          case 'name':
              color = name(trimmed);
+             if (color.hex !== '' && color.rgb != '') {
+                 Utils.sendGoogleAnalyticsEvent(
+                     GoogleAnalyticsKeys.ConvertFromHtmlColor.category,
+                     GoogleAnalyticsKeys.ConvertFromHtmlColor.action,
+                     trimmed);
+             }
              break;
     }
     return color;
@@ -90,16 +110,15 @@ function name(input) {
     let index = ColorNames.indexOf(input.toLowerCase());
 
     if (index === -1) {
-        return {input: '', out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
+        return { hex: '', rgb: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
     }
 
-    let name = ColorNames[index];
     let hex = ColorHexNames[index];
     let rgb = hex_to_rgb(hex);
 
     let background = hex === '' ? DefaultBackgroundColor : hex;
     let textColor = rgb === '' ?  DefaultTextColor :  setTextColer(rgb);
-    return {input: name, out_left: hex, out_right: rgb, textColor: textColor, background: background};
+    return {hex: hex, rgb: rgb, textColor: textColor, background: background};
 }
 
 /**
@@ -122,14 +141,21 @@ function rgb(input) {
         let hex = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
         let background = input;
-        if (background.indexOf('rgb') === -1) {
-            background = `rgb(${background})`;
+        if (!input.startsWith('rgb')) {
+            if (!input.startsWith('(')) {
+                background = `rgb(${input}`;
+            } else  {
+                background = `rgb(${input.substring(1, input.length)}`;
+            }
+        }
+        if (!input.endsWith(')')) {
+            background += ')';
         }
 
         let textColor = input === '' ?  DefaultTextColor :  setTextColer(input);
-        return {input: input, out_left: hex, out_right: rgb, textColor: textColor, background: background};
+        return { hex: hex, rgb: background, textColor: textColor, background: background};
     }
-    return {input: input, out_left: '', out_right: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
+    return { hex: '', rgb: '', textColor: DefaultTextColor, background: DefaultBackgroundColor};
 }
 
 /**
@@ -152,7 +178,7 @@ function hex(input) {
     let background = long_hex === '' ? DefaultBackgroundColor : long_hex;
     let textColor = rgb === '' ?  DefaultTextColor :  setTextColer(rgb);
 
-    return {input: long_hex, out_left: long_hex, out_right: rgb, textColor: textColor, background: background};
+    return {hex: long_hex, rgb: rgb, textColor: textColor, background: background};
 }
 
 /**

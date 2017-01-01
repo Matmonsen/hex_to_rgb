@@ -32,8 +32,27 @@ function copy(value) {
 
     textArea.select();
 
-    document.execCommand('copy')
+    document.execCommand('copy');
     document.body.removeChild(textArea);
 };
 
-export default {copy};
+export function sendGoogleAnalyticsEvent(category, action, label = null, value = null) {
+    let event = {
+        hitType: 'event',
+        eventCategory: category,
+        eventAction: action
+    };
+
+    if (label !== null) {
+        event['eventLabel'] = label;
+    }
+
+    if (value !== null) {
+        event['eventValue'] = value;
+    }
+
+    ga('send',event);
+
+}
+
+export default {copy, sendGoogleAnalyticsEvent};
