@@ -25,7 +25,7 @@ function whichTextColor(r,g,b) {
  */
 function whatIsInput(input) {
     let type = null;
-    if (input.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i) !== null
+    if (input.match(/^(#[A-Fa-f0-9]{6}|#[A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i) !== null
         && (input.length === 3 || input.length === 6 || input.length === 4 || input.length === 7)) {
         type = 'hex';
     } else if (input.match(/rgb\([0-9]{1,3},[0-9]{1,3},[0-9]{1,3}\)$/i) !== null

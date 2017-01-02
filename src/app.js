@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     // Sets listener for onchange in input
     input.addEventListener('input', setColor);
-
+    input.addEventListener('focus', () => {
+        input.scrollIntoView(true);
+    });
 
     explainText.innerHTML = InputExplainText;
 
@@ -33,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     function setColor(e) {
         let color = ColorConverter.convert(e.target.value);
 
-        console.log(color)
         if (color.hex === '' && color.rgb === '') {
             buttons.style.display = 'none';
             explainText.innerHTML = InputExplainText;

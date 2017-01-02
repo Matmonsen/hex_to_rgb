@@ -86,7 +86,7 @@ button {
 
 @include respond-to(xs) {
     button {
-        padding: 40px;
+        padding: 25px;
     }
     button, input, p {
         width: 90%;
@@ -94,7 +94,7 @@ button {
 }
 @include respond-to(sm) {
     button {
-        padding: 60px;
+        padding: 30px;
     }
     input {
         height: 80px;
