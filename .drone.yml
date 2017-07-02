@@ -12,7 +12,6 @@ pipeline:
       when:
         branch: master
 
-
   deploy:
     image: nginx:alpine
     container_name: nginx-hextorgb
