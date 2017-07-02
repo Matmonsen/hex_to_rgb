@@ -1,0 +1,18 @@
+version: '3'
+pipeline:
+  build:
+    image: node:8.1.2-alpine
+    commands:
+      - npm install webpack -g
+      - npm install
+      - npm build
+
+  deploy:
+    image: nginx:alpine
+    container_name: nginx-hextorgb
+    ports:
+      - "82:80"
+    commands:
+      - cp build/ /usr/share/nginx/html
+
+
