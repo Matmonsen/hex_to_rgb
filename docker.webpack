@@ -1,0 +1,5 @@
+FROM node:8.1.2-alpine
+
+RUN npm install webpack -g
+RUN npm install
+RUN npm build

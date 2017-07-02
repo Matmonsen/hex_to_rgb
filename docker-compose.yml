@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker.nginx
+    image: nginx-hextorgb
+    container_name: nginx-hextorgb
+    ports:
+      - "82:80"
+  webpack:
+    build:
+      context: .
+      dockerfile: docker.webpack
+    image: webpack-hextorgb
+    container_name: webpack-hextorgb
+
