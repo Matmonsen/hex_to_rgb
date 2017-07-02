@@ -3,10 +3,11 @@ pipeline:
   build:
     image: node:8.1.2-alpine
     commands:
-      - pwd
-#      - npm install webpack -g
-#      - npm install
-#      - npm build
+      - npm install webpack -g
+      - npm install
+      - npm build
+      - ls build/
+
 
   deploy:
     image: nginx:alpine
@@ -14,7 +15,7 @@ pipeline:
     ports:
       - "82:80"
     commands:
-      - pwd
-#      - cp build/ /usr/share/nginx/html
+      - ls
+      - cp build/ /usr/share/nginx/html
 
 
