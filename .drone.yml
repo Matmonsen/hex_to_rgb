@@ -6,7 +6,6 @@ pipeline:
       - npm install webpack -g
       - npm install
       - npm build
-      - ls build/
 
 
   deploy:
@@ -15,7 +14,6 @@ pipeline:
     ports:
       - "82:80"
     commands:
-      - ls
-      - cp build/ /usr/share/nginx/html
+      - cp build/. /usr/share/nginx/html/
 
 
