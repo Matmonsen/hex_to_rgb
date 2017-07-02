@@ -14,6 +14,9 @@ pipeline:
     ports:
       - "82:80"
     commands:
-      - cp build/. /usr/share/nginx/html/
-
+      - cp -a build/. /usr/share/nginx/html/
+    # Only deploy on master
+       bundle:
+          when:
+            branch: master
 
