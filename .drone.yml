@@ -17,7 +17,7 @@ pipeline:
     image: nginx:alpine
     container_name: nginx-hextorgb
     ports:
-      - "82:80"
+      - "81:80"
     commands:
       - cp -a build/. /usr/share/nginx/html/
     # Only deploy on master
