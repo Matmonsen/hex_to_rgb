@@ -1,11 +1,16 @@
 version: '3'
 pipeline:
+
   build:
     image: node:8.1.2-alpine
     commands:
       - npm install webpack -g
       - npm install
       - npm build
+  # Only build on master
+     bundle:
+        when:
+          branch: master
 
 
   deploy:
@@ -14,7 +19,7 @@ pipeline:
     ports:
       - "82:80"
     commands:
-      - cp -a build/. /usr/share/nginx/html/
+      - 'cp -a build/. /usr/share/nginx/html/'
     # Only deploy on master
        bundle:
           when:
