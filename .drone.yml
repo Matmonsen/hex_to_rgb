@@ -7,10 +7,10 @@ pipeline:
       - npm install webpack -g
       - npm install
       - npm build
-  # Only build on master
-     bundle:
-        when:
-          branch: master
+    # Only build on master
+    bundle:
+      when:
+        branch: master
 
 
   deploy:
@@ -19,9 +19,9 @@ pipeline:
     ports:
       - "82:80"
     commands:
-      - 'cp -a build/. /usr/share/nginx/html/'
+      - cp -a build/. /usr/share/nginx/html/
     # Only deploy on master
-       bundle:
-          when:
-            branch: master
+    bundle:
+      when:
+        branch: master
 
