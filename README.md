@@ -1,3 +1,6 @@
+
+[![Build Status](https://drone.sindrenerdal.no/api/badges/Matmonsen/hex_to_rgb/status.svg)](https://drone.sindrenerdal.no/Matmonsen/hex_to_rgb)
+
 # Hex to rgb
 A simple web app for converting between hex and rgb.
 
