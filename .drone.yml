@@ -9,6 +9,7 @@ pipeline:
       - echo $$test
       - echo ${TEST}
       - echo ${SE}
+      - echo $SE
       #- echo "heia"
       #- npm install webpack -g
       #- npm install
