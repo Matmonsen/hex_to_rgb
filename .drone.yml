@@ -20,7 +20,7 @@ pipeline:
     image: plugins/docker
     registry: registry.sindrenerdal.no:5000
     repo: registry.sindrenerdal.no:5000/hextorgb
-    insecure: false    
+    insecure: true    
     secrets: [ REGISTRY_USERNAME, REGISTRY_PASSWORD ]
   #deploy:
     #image: nginx:alpine
