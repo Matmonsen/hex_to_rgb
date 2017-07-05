@@ -8,7 +8,7 @@ pipeline:
     repo: registry.sindrenerdal.no:5000/hextorgb
     password: test
     username: test
-    tags: ${REGISTRY_USERNAME}
+    tags: ${REGISTRY_USERNAME} 
     debug: true
 
 
