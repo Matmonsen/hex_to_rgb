@@ -18,7 +18,7 @@ pipeline:
       
   publish:
     image: plugins/docker
-    repo: localhost:5000
+    registry: localhost:5000
     tag: $$BUILD_NUMBER
     insecure: true    
     username: $REGISTRY_USERNAME
