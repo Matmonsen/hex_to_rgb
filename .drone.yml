@@ -7,13 +7,17 @@ pipeline:
       - npm install webpack -g
       - npm install
       - npm build
-      - docker build -t localhost:5000/hex-to-rgb .  
-      - docker push localhost:5000/hex-to-rgb
     # Only build on master
     bundle:
       when:
         branch: master  
       
+      
+  publish:
+    image: plugins/docker
+    repo: localhost:5000
+    tag: $$BUILD_NUMBER
+    insecure: true    
   #deploy:
     #image: nginx:alpine
     #container_name: nginx-hextorgb
