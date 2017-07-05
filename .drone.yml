@@ -8,7 +8,7 @@ pipeline:
       - echo $test
       - echo ${$test}
       - echo ${test}
-      - echo "heia"
+      #- echo "heia"
       #- npm install webpack -g
       #- npm install
       #- npm build
