@@ -22,8 +22,7 @@ pipeline:
     repo: hextorgb
     tag: latest
     #insecure: false    
-    username: $REGISTRY_USERNAME
-    password: $REGISTRY_PASSWORD
+    secrets: [ REGISTRY_USERNAME, REGISTRY_PASSWORD ]
   #deploy:
     #image: nginx:alpine
     #container_name: nginx-hextorgb
