@@ -6,11 +6,7 @@ pipeline:
     environment:
       - SE=${TEST}
     commands:
-      - echo $$test
-      - echo ${TEST}
-      - echo ${SE}
-      - echo $SE
-      #- echo "heia"
+      - echo "heia"
       #- npm install webpack -g
       #- npm install
       #- npm build
@@ -25,6 +21,8 @@ pipeline:
     repo: localhost:5000
     tag: $$BUILD_NUMBER
     insecure: true    
+    username: $REGISTRY_USERNAME
+    password: $REGISTRY_PASSWORD
   #deploy:
     #image: nginx:alpine
     #container_name: nginx-hextorgb
