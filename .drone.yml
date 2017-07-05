@@ -6,7 +6,7 @@ pipeline:
     commands:
       - echo "$test"
       - echo $test
-      - echo ${$test}
+      #- echo ${$test}
       - echo ${test}
       #- echo "heia"
       #- npm install webpack -g
