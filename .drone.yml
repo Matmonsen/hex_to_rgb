@@ -1,27 +1,32 @@
 version: '3'
 pipeline:
 
-  build:
-    image: node:8.1.2-alpine
-    environment:
-      - SE=${TEST}
-    commands:
-      - echo "heia"
-      #- npm install webpack -g
-      #- npm install
-      #- npm build
-    # Only build on master
-    bundle:
-      when:
-        branch: master  
-      
-      
+
   publish:
     image: plugins/docker
     registry: registry.sindrenerdal.no:5000
     repo: registry.sindrenerdal.no:5000/hextorgb
-    insecure: true    
     secrets: [ REGISTRY_USERNAME, REGISTRY_PASSWORD ]
+    password: ${REGISTRY_PASSWORD}
+    username: ${REGISTRY_USERNAME}
+
+
+  #build:
+    #image: node:8.1.2-alpine
+    #environment:
+      #- SE=${TEST}
+    #commands:
+     # - echo "heia"
+      #- npm install webpack -g
+      #- npm install
+      #- npm build
+    # Only build on master
+    #bundle:
+     # when:
+      # branch: master  
+      
+      
+  
   #deploy:
     #image: nginx:alpine
     #container_name: nginx-hextorgb
