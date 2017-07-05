@@ -21,6 +21,7 @@ pipeline:
     registry: registry.sindrenerdal.no:5000
     #repo: registry.sindrenerdal.no:5000
     tag: latest
+    name: test
     #insecure: false    
     #username: $REGISTRY_USERNAME
     #password: $REGISTRY_PASSWORD
