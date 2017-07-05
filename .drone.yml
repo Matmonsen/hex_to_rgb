@@ -4,7 +4,7 @@ pipeline:
   build:
     image: node:8.1.2-alpine
     environment:
-      SE=${TEST}
+      - SE=${TEST}
     commands:
       - echo $$test
       - echo ${TEST}
