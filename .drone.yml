@@ -5,6 +5,9 @@ pipeline:
     image: node:8.1.2-alpine
     commands:
       - echo "$test"
+      - echo $test
+      - echo ${$test}
+      - echo ${test}
       - echo "heia"
       #- npm install webpack -g
       #- npm install
