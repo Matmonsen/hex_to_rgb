@@ -20,7 +20,7 @@ pipeline:
     image: plugins/docker
     registry: registry.sindrenerdal.no:5000
     #repo: registry.sindrenerdal.no:5000
-    tag: $$BUILD_NUMBER
+    tag: latest
     #insecure: false    
     #username: $REGISTRY_USERNAME
     #password: $REGISTRY_PASSWORD
