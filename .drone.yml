@@ -19,8 +19,7 @@ pipeline:
   publish:
     image: plugins/docker
     registry: registry.sindrenerdal.no:5000
-    repo: hextorgb
-    tag: [ latest ]
+    repo: registry.sindrenerdal.no:5000/hextorgb
     #insecure: false    
     secrets: [ REGISTRY_USERNAME, REGISTRY_PASSWORD ]
   #deploy:
