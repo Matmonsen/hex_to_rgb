@@ -4,9 +4,10 @@ pipeline:
   build:
     image: node:8.1.2-alpine
     commands:
-      - npm install webpack -g
-      - npm install
-      - npm build
+      - echo $test
+      #- npm install webpack -g
+      #- npm install
+      #- npm build
     # Only build on master
     bundle:
       when:
