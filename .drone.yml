@@ -9,6 +9,7 @@ pipeline:
     password: test
     username: test
     tags: ${REGISTRY_USERNAME}
+    debug: true
 
 
   #build:
