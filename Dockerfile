@@ -1,1 +1,1 @@
-FROM ubuntu:14.04
+FROM alpine:3.5
