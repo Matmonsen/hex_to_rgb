@@ -11,16 +11,21 @@ pipeline:
     bundle:
       when:
         branch: master
-
-  deploy:
-    image: nginx:alpine
-    container_name: nginx-hextorgb
-    ports:
-      - "81:80"
+  
+  push:
     commands:
-      - cp -a build/. /usr/share/nginx/html/
+      - docker build -t localhost:5000/hex-to-rgb .  
+      - docker push localhost:5000/hex-to-rgb  
+      
+  #deploy:
+    #image: nginx:alpine
+    #container_name: nginx-hextorgb
+    #ports:
+      #- "80:80"
+    #commands:
+      #- cp -a build/. /usr/share/nginx/html/
     # Only deploy on master
-    bundle:
-      when:
-        branch: master
+    #bundle:
+     # when:
+       # branch: master
 
