@@ -1,15 +1,10 @@
 version: '3'
 pipeline:
-  build:
-    image: alpine:latest
-    commands: 
-      - 'echo "${DOCKER_USERNAME}"'
 
   publish:
     image: plugins/docker
     repo: matmonsen/hex_to_rgb
-    password: ${DOCKER_USERNAME}
-    username: ${DOCKER_USERNAME}
+    secrets: [docker_username, docker_password]
 
 
   #build:
