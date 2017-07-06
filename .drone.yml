@@ -1,6 +1,9 @@
 version: '3'
 pipeline:
-
+  build:
+    image: alpine:latest
+    commands: 
+      - 'echo "${DOCKER_USERNAME}"'
 
   publish:
     image: plugins/docker
