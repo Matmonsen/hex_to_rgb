@@ -1,6 +1,6 @@
 version: '3'
 pipeline:
-
+ 
   publish:
     image: plugins/docker
     repo: matmonsen/hex_to_rgb
