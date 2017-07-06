@@ -2,7 +2,7 @@ version: '3'
 pipeline:
  
   publish:
-    image: plugins/docker
+    image: plugins/docker 
     repo: matmonsen/hex_to_rgb
     secrets: [docker_username, docker_password]
 
