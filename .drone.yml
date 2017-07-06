@@ -4,12 +4,9 @@ pipeline:
 
   publish:
     image: plugins/docker
-    registry: registry.sindrenerdal.no:5000
-    repo: registry.sindrenerdal.no:5000/hextorgb
-    password: test
-    username: test
-    tags: ${REGISTRY_USERNAME} 
-    debug: true
+    repo: matmonsen/hex_to_rgb
+    password: ${DOCKER_USERNAME}
+    username: ${DOCKER_USERNAME}
 
 
   #build:
