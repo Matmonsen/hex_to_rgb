@@ -15,10 +15,8 @@ pipeline:
     environment:
       - KEY=${test}
     commands: 
-      - echo ${test}
-      - docker ps -a
-      - docker images
       - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
+      - docker images
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
       - docker rmi registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
