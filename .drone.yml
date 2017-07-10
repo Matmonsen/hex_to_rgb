@@ -3,6 +3,8 @@ pipeline:
   
   publish:
     image: docker 
+    environment: 
+      DRONE_ADMIN: dev
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands: 
