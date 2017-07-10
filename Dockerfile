@@ -1,2 +1,2 @@
-FROM alpine:3.5
+FROM alpine:latest
  
