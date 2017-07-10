@@ -4,31 +4,19 @@ pipeline:
   publish:
     image: docker 
     privileged: true
-    #environment: 
-      #DRONE_ADMIN: dev
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands: 
-      - docker version
       - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb . 
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb
-  #publish:
-      #image: appleboy/drone-ssh
-      #host: sindrenerdal.no
-      #username: dev
-      #key: ${DEPLOY_KEY}
-      #port: 22
-      #script:
-        #- echo hello
- 
-  #publish:
-    #image: plugins/docker 
-    #repo: registry.sindrenerdal.no:5000/hex_to_rgb
-    #secrets: [docker_username, docker_password] 
-  #publish:
-    #image: plugins/docker 
-    #repo: matmonsen/hex_to_rgb
-    #secrets: [docker_username, docker_password]
+      - echo $DRONE_BUILD_NUMBER 
+      - echo ${DRONE_BUILD_NUMBER}
+      - echo "${DRONE_BUILD_NUMBER}"
+      - echo "$DRONE_BUILD_NUMBER"
+      
+  
+  deploy:
+    
 
 
   #build:
