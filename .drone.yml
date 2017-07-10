@@ -1,8 +1,9 @@
 version: '3'
 pipeline:
   
-  build:
+  publish:
     image: docker 
+    privileged: true
     environment: 
       DRONE_ADMIN: dev
     volumes:
