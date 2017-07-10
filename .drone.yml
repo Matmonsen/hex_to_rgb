@@ -2,7 +2,9 @@ version: '3'
 pipeline:
   
   publish:
-    image: plugins/docker 
+    image: docker 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     commands: 
       - docker version
       #- docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb . 
