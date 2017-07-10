@@ -4,7 +4,7 @@ pipeline:
   publish:
     image: alpine
     commands: 
-      - docker version
+      - sudo docker version
   #publish:
       #image: appleboy/drone-ssh
       #host: sindrenerdal.no
