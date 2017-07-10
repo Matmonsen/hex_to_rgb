@@ -1,13 +1,19 @@
 version: '3'
 pipeline:
   
+  build:
+    images: alpine
+    secrets: [ ssh_key ]
+    commands:
+      - echo ${test}
+  
   publish:
     image: docker 
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    secrets: 
-      [test]
+    environment:
+      - KEY=${test}
     commands: 
       - echo ${test}
       - docker ps -a
