@@ -2,10 +2,11 @@ version: '3'
 pipeline:
   
   publish:
-    image: plugins/docker
+    image: plugins/docker 
     commands: 
-      - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb . 
-      - docker push registry.sindrenerdal.no:5000/hex_to_rgb
+      - docker version
+      #- docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb . 
+      #- docker push registry.sindrenerdal.no:5000/hex_to_rgb
   #publish:
       #image: appleboy/drone-ssh
       #host: sindrenerdal.no
