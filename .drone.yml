@@ -12,9 +12,9 @@ pipeline:
   
   deploy:
     image: appleboy/drone-ssh
-    PLUGIN_HOST: sindrenerdal.no
-    PLUGIN_USERNAME: dev
-    PLUGIN_KEY: test
+    host: sindrenerdal.no
+    username: dev
+    key: test
     
     
 
