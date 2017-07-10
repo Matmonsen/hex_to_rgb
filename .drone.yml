@@ -14,10 +14,12 @@ pipeline:
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
   deploy:
+    secrets: 
+      [test]
     image: appleboy/drone-ssh
     host: sindrenerdal.no
     username: dev
-    key: $SSH_KEY
+    key: $test
     
     
 
