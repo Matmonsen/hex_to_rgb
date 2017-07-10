@@ -4,14 +4,14 @@ pipeline:
   publish:
     image: docker 
     privileged: true
-    environment: 
-      DRONE_ADMIN: dev
+    #environment: 
+      #DRONE_ADMIN: dev
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands: 
       - docker version
-      #- docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb . 
-      #- docker push registry.sindrenerdal.no:5000/hex_to_rgb
+      - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb . 
+      - docker push registry.sindrenerdal.no:5000/hex_to_rgb
   #publish:
       #image: appleboy/drone-ssh
       #host: sindrenerdal.no
