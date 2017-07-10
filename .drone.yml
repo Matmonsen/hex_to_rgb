@@ -4,7 +4,7 @@ pipeline:
   publish:
     image: plugins/docker 
     repo: registry.sindrenerdal.no:5000/hex_to_rgb
-    secrets: [docker_username, docker_password]
+    secrets: [docker_username, docker_password] 
   #publish:
     #image: plugins/docker 
     #repo: matmonsen/hex_to_rgb
