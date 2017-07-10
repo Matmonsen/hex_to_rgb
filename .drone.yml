@@ -6,8 +6,10 @@ pipeline:
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    secrets: 
+      [test]
     commands: 
-      - echo ${SSH_KEY}
+      - echo ${test}
       - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
