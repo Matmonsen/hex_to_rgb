@@ -1,10 +1,23 @@
 version: '3'
 pipeline:
- 
+  
   publish:
-    image: plugins/docker 
-    repo: registry.sindrenerdal.no:5000/hex_to_rgb
-    secrets: [docker_username, docker_password] 
+    image: alpine
+    commands: 
+      - docker version
+  #publish:
+      #image: appleboy/drone-ssh
+      #host: sindrenerdal.no
+      #username: dev
+      #key: ${DEPLOY_KEY}
+      #port: 22
+      #script:
+        #- echo hello
+ 
+  #publish:
+    #image: plugins/docker 
+    #repo: registry.sindrenerdal.no:5000/hex_to_rgb
+    #secrets: [docker_username, docker_password] 
   #publish:
     #image: plugins/docker 
     #repo: matmonsen/hex_to_rgb
