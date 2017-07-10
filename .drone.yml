@@ -2,7 +2,7 @@ version: '3'
 pipeline:
   
   build:
-    images: alpine
+    image: alpine
     secrets: [ ssh_key ]
     commands:
       - echo ${test}
