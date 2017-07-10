@@ -9,9 +9,13 @@ pipeline:
     commands: 
       - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
-      
+      - ls ${HOME}
   
- # deploy:
+  #deploy:
+    #image: appleboy/drone-ssh
+    #PLUGIN_HOST: sindrenerdal.no
+    #PLUGIN_USERNAME: dev
+    
     
 
 
