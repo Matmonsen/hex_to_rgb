@@ -14,7 +14,7 @@ pipeline:
     image: appleboy/drone-ssh
     host: sindrenerdal.no
     username: dev
-    key: ${SSH_KEY}
+    key: $SSH_KEY
     
     
 
