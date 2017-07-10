@@ -2,9 +2,10 @@ version: '3'
 pipeline:
   
   publish:
-    image: alpine
+    image: docker
     commands: 
-      - sudo docker version
+      - ls
+      - docker version
   #publish:
       #image: appleboy/drone-ssh
       #host: sindrenerdal.no
