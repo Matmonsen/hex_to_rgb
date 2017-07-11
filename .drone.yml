@@ -1,25 +1,25 @@
 version: '3'
 pipeline:
   
-  deploy:  
-    image: astasheep/ubuntu-sshd
+  #deploy:  
+   # image: astasheep/ubuntu-sshd
+   # secrets: [SSH_PATH]
+   # bash:
+   #   script:
+    #    - chmod 600 $SSH_PATH
+    #    - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
+  build:
+    image: ubuntu
     secrets: [SSH_PATH]
-    bash:
-      script:
-        - chmod 600 $SSH_PATH
-        - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
-  #build:
-    #image: ubuntu
-    #secrets: [SSH_PATH]
-    #volumes:
-    #  - /etc/deployment:/etc/deployment
-    #commands:
-    #  - apt-get -yq update && apt-get -yqq install ssh
-    #  - ls -l
-    #  - mkdir .ssh
-   #   - echo $SSH_PATH
-   #   - cp -a $SSH_PATH .ssh/
-   #   - ssh dev@sindrenerdal.no
+    volumes:
+      - /etc/deployment:/etc/deployment
+    commands:
+      - apt-get -yq update && apt-get -yqq install ssh
+      - ls -l
+      - mkdir .ssh
+      - echo $SSH_PATH
+      - cp -a $SSH_PATH .ssh/
+      - ssh -tt dev@sindrenerdal.no
   
   #publish:
   #  image: docker 
