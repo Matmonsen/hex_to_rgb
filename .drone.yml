@@ -1,6 +1,6 @@
 version: '3'
 pipeline:
-  deploy:  
+  deploy:   
     image: matmonsen/deployment
     secrets: [SSH_PATH]
     volumes:
