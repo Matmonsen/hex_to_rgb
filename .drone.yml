@@ -14,12 +14,13 @@ pipeline:
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
-      - apt-get -yq update && apt-get -yqq install ssh
+      #- apt-get -yq update && apt-get -yqq install ssh
       - ls -l
-      - mkdir .ssh
-      - echo $SSH_PATH
-      - cp -a $SSH_PATH .ssh/
-      - ssh -tt dev@sindrenerdal.no
+      - ls -l /home/
+      #- mkdir .ssh
+      #- echo $SSH_PATH
+      #- cp -a $SSH_PATH .ssh/
+      #- ssh -tt dev@sindrenerdal.no
   
   #publish:
   #  image: docker 
