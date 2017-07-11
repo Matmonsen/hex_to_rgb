@@ -8,6 +8,7 @@ pipeline:
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
+      - whoami
       - ls -l /home/deployUser/.ssh/
       
   #build:
