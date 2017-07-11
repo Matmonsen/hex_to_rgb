@@ -28,7 +28,9 @@ pipeline:
     image: appleboy/drone-ssh
     host: sindrenerdal.no
     username: dev
-    password: tullball
+    password: ${SSH_PASSWORD}
+    environment:
+            - SSH_PASSWORD=${SSH_PASSWORD}
     
     
 
