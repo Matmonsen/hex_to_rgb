@@ -9,6 +9,7 @@ pipeline:
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
+      - su - deployUser
       - cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
       - ssh -o StrictHostKeyChecking=no dev@sindrenerdal.no 'echo "heia"'
   #build:
