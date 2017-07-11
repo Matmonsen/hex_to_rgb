@@ -5,7 +5,6 @@ pipeline:
  
   deploy:  
     image: matmonsen/deployment
-    secrets: [SSH_PATH]
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
