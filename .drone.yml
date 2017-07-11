@@ -7,7 +7,7 @@ pipeline:
     bash:
       script:
         - chmod 600 $SSH_PATH
-        - ssh -i .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
+        - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
   #build:
     #image: ubuntu
     #secrets: [SSH_PATH]
