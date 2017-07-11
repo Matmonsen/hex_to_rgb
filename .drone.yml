@@ -5,15 +5,14 @@ pipeline:
   deploy:  
     image: ubuntu
     secrets: [SSH_PATH]
-    bash:
-      script:
-        - adduser -h /home/deployUser -s /bin/bash -D -S deployUser
-        - passwd -d deployUser
-        - mkdir -p /home/deployUser/.ssh
-        - chmod 700 /home/deployUser/.ssh
-        - chown -R deployUser /home/deployUser/.ssh
-        - apt-get -yq update && apt-get -yqq install ssh
-        - ssh -i $SS_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
+    commands:
+      - adduser -h /home/deployUser -s /bin/bash -D -S deployUser
+      - passwd -d deployUser
+      - mkdir -p /home/deployUser/.ssh
+      - chmod 700 /home/deployUser/.ssh
+      - chown -R deployUser /home/deployUser/.ssh
+      - apt-get -yq update && apt-get -yqq install ssh
+      - ssh -i $SS_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
   #build:
     #dockerfile: Dockerfile.deploy
    # secrets: [SSH_PATH]
