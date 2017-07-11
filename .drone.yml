@@ -2,7 +2,7 @@ version: '3'
 pipeline:
   
   build:
-    image: alpine
+    image: ubuntu
     secrets: [SSH_KEY]
     volumes:
       - /etc/deployment:/etc/deployment
