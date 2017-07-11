@@ -5,6 +5,8 @@ pipeline:
   deploy:  
     image: ubuntu
     secrets: [SSH_PATH]
+    volumes:
+      - /etc/deployment:/etc/deployment
     commands:
       - useradd -m -d /home/deployUser deployUser
       - mkdir -p /home/deployUser/.ssh
