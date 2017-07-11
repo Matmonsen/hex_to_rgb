@@ -11,9 +11,6 @@ pipeline:
   deploy:  
     image: matmonsen/deployment
     secrets: [SSH_PATH, DOCKER_USERNAME, DOCKER_PASSWORD]
-    auth_config:
-      username: $DOCKER_USERNAME
-      password: $DOCKER_PASSWORD
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
