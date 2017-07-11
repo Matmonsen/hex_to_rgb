@@ -1,7 +1,7 @@
 version: '3'
 pipeline:
   deploy:    
-    image: matmonsen/deployment
+    image: matmonsen/deployment 
     secrets: [SSH_PATH]
     volumes:
       - /etc/deployment:/etc/deployment
