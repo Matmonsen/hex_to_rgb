@@ -3,7 +3,7 @@ pipeline:
   
   build:
     image: ubuntu
-    secrets: [SSH_KEY]
+    secrets: [SSH_PATH]
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
@@ -11,7 +11,7 @@ pipeline:
       - ls -l
       - mkdir .ssh
       - echo $SSH_PATH
-      - cp -a $SSH_PATH .ssh
+      - cp -a $SSH_PATH .ssh/
       - ssh dev@sindrenerdal.no
   
   publish:
