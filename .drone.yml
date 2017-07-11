@@ -1,7 +1,12 @@
 version: '3'
 pipeline:
   
-
+  auth:
+    image: docker
+    secrets: [DOCKER_USERNAME, DOCKER_PASSWORD]
+    commands:
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      
   deploy:  
     image: matmonsen/deployment
     secrets: [SSH_PATH]
