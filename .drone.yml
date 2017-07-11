@@ -3,9 +3,6 @@ pipeline:
   
   build:
     image: alpine
-    secrets: [ ssh_key ]
-    environment:
-      - SSH_KEY=${SSH_KEY}
     commands:
       - echo ${TESTER}
       - echo ${test}
