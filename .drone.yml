@@ -24,11 +24,10 @@ pipeline:
       - docker rmi registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
   deploy:
-    secrets: [SSH_PASSWORD]
     image: appleboy/drone-ssh
     host: sindrenerdal.no
-    username: dev
-    password: wrong
+    username: test
+    password: testinger
     
     
 
