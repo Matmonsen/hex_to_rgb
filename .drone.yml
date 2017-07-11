@@ -1,44 +1,50 @@
 version: '3'
 pipeline:
   
-  build:
-    image: ubuntu
+  deploy:  
     secrets: [SSH_PATH]
-    volumes:
-      - /etc/deployment:/etc/deployment
-    commands:
-      - apt-get -yq update && apt-get -yqq install ssh
-      - ls -l
-      - mkdir .ssh
-      - echo $SSH_PATH
-      - cp -a $SSH_PATH .ssh/
-      - ssh dev@sindrenerdal.no
+    bash:
+      script:
+        - chmod 600 $SSH_PATH
+        - ssh -i .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
+  #build:
+    #image: ubuntu
+    #secrets: [SSH_PATH]
+    #volumes:
+    #  - /etc/deployment:/etc/deployment
+    #commands:
+    #  - apt-get -yq update && apt-get -yqq install ssh
+    #  - ls -l
+    #  - mkdir .ssh
+   #   - echo $SSH_PATH
+   #   - cp -a $SSH_PATH .ssh/
+   #   - ssh dev@sindrenerdal.no
   
-  publish:
-    image: docker 
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - KEY=${test}
-    commands:
-      - echo ${TESTER}
-      - echo ${test}
-      - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
-      - docker images
-      - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
-      - docker rmi registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
+  #publish:
+  #  image: docker 
+  #  privileged: true
+   # volumes:
+   #   - /var/run/docker.sock:/var/run/docker.sock
+  #  environment:
+   #   - KEY=${test}
+   # commands:
+    #  - echo ${TESTER}
+    #  - echo ${test}
+   #   - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
+   #   - docker images
+    #  - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
+   #   - docker rmi registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
   
   
-  deploy:
-    image: appleboy/drone-ssh
-    host: sindrenerdal.no
-    username: dev
-    secrets: [SSH_KEY]
-    key: $SSH_KEY
-    environment:
-      - SSH_KEY=${SSH_KEY}
+  #deploy:
+    #image: appleboy/drone-ssh
+   # host: sindrenerdal.no
+  #  username: dev
+ #   secrets: [SSH_KEY]
+  #  key: $SSH_KEY
+   # environment:
+   #   - SSH_KEY=${SSH_KEY}
   
   #funker, men ikke auth
   #deploy:
