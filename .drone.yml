@@ -3,7 +3,7 @@ pipeline:
   
 
   deploy:  
-    image: ubuntu
+    image: matmonsen/deployment
     secrets: [SSH_PATH]
     volumes:
       - /etc/deployment:/etc/deployment
