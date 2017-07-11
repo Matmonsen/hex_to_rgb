@@ -6,6 +6,7 @@ pipeline:
     secrets: [ ssh_key ]
     commands:
       - echo ${TESTER}
+      - echo ${test}
   
   publish:
     image: docker 
@@ -16,14 +17,14 @@ pipeline:
       - KEY=${test}
     commands:
       - echo ${TESTER}
+      - echo ${test}
       - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
       - docker images
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
       - docker rmi registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
   deploy:
-    secrets: 
-      [test]
+    secrets: [test]
     image: appleboy/drone-ssh
     host: sindrenerdal.no
     username: dev
