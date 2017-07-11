@@ -9,7 +9,7 @@ pipeline:
     #    - chmod 600 $SSH_PATH
     #    - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
   build:
-    image: ubuntu
+    dockerfile: Dockerfile.deploy
     secrets: [SSH_PATH]
     volumes:
       - /etc/deployment:/etc/deployment
