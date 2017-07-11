@@ -4,12 +4,7 @@ pipeline:
   build:
     image: alpine
     secrets: [SSH_KEY]
-    #environment:
-      #- SSH_KEY=${SSH_KEY}
     commands:
-      - echo ${TESTER}
-      - echo ${test}
-      - echo ${SSH_KEY}
       - echo $SSH_KEY
   
   publish:
@@ -32,6 +27,10 @@ pipeline:
     host: sindrenerdal.no
     username: test
     password: testinger
+    secrets: [SSH_KEY]
+    key: $SSH_KEY
+    environment:
+      - SSH_KEY=${SSH_KEY}
     
     
 
