@@ -1,8 +1,5 @@
 version: '3'
 pipeline:
- 
-  
-
   deploy:  
     image: matmonsen/deployment
     secrets: [SSH_PATH]
