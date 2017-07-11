@@ -10,8 +10,8 @@ pipeline:
     commands:
       - whoami
       - ls -l /etc/deployment/
-      - cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
-      - ssh -o StrictHostKeyChecking=no dev@sindrenerdal.no 'nano test.txt'
+      #- cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
+      - ssh -o StrictHostKeyChecking=no -i $SSH_PATH dev@sindrenerdal.no 'nano test.txt'
       
   #build:
     #dockerfile: Dockerfile.deploy
