@@ -14,7 +14,8 @@ pipeline:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - KEY=${test}
-    commands: 
+    commands:
+      - echo ${TESTER}
       - docker build --tag registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER} . 
       - docker images
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
