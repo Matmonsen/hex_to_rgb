@@ -10,8 +10,8 @@ pipeline:
       - apt-get -yq update && apt-get -yqq install ssh
       - ls -l
       - mkdir .ssh
-      - cp -a $SSH_KEY .ssh
-      - echo $SSH_KEY
+      - echo $SSH_PATH
+      - cp -a $SSH_PATH .ssh
       - ssh dev@sindrenerdal.no
   
   publish:
