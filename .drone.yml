@@ -1,6 +1,13 @@
 version: '3'
 pipeline:
  
+  test:  
+    image: alpine
+    secrets: [SSH_PATH, DOCKER_USERNAME, DOCKER_PASSWORD]
+    commands:
+      - echo $DOCKER_USERNAME
+      - echo $DOCKER_PASSWORD
+ 
   deploy:  
     image: matmonsen/deployment
     secrets: [SSH_PATH, DOCKER_USERNAME, DOCKER_PASSWORD]
