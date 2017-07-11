@@ -11,11 +11,12 @@ pipeline:
       - useradd -m -d /home/deployUser deployUser
       - mkdir -p /home/deployUser/.ssh
       - cp $SSH_PATH /home/deployUser/.ssh/
+      - ls -l /home/deployUser/.ssh
       - chmod 700 /home/deployUser/.ssh
       - chown -R deployUser /home/deployUser/.ssh
       - apt-get -yq update && apt-get -yqq install ssh
       - echo "heia"
-      - ssh -o StrictHostKeyChecking=no -i $SSH_PATH dev@sindrenerdal.no 'echo "heia"'
+      - ssh -o StrictHostKeyChecking=no dev@sindrenerdal.no 'echo "heia"'
   #build:
     #dockerfile: Dockerfile.deploy
    # secrets: [SSH_PATH]
