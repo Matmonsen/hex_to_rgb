@@ -10,7 +10,7 @@ pipeline:
       - /etc/deployment:/etc/deployment
     commands:
       - echo $USER
-      - cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
+      - su -m deployUser -c 'cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/'
       - ssh -o StrictHostKeyChecking=no dev@sindrenerdal.no 'echo "heia"'
   #build:
     #dockerfile: Dockerfile.deploy
