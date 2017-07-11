@@ -9,9 +9,8 @@ pipeline:
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
-      - echo $USER
-      - su -m deployUser -c 'cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/'
-      - ssh -o StrictHostKeyChecking=no dev@sindrenerdal.no 'echo "heia"'
+      - ls -l /home/deployUser/.ssh/
+      
   #build:
     #dockerfile: Dockerfile.deploy
    # secrets: [SSH_PATH]
