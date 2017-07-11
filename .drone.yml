@@ -5,7 +5,7 @@ pipeline:
     image: alpine
     secrets: [ ssh_key ]
     commands:
-      - echo ${test}
+      - echo ${TESTER}
   
   publish:
     image: docker 
