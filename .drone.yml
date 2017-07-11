@@ -5,11 +5,11 @@ pipeline:
 
   deploy:  
     image: matmonsen/deployment
+    secrets: [SSH_PATH]
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
       - whoami
-      - ls -l /etc/deployment/
       #- cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
       - ssh -o StrictHostKeyChecking=no -i $SSH_PATH dev@sindrenerdal.no 'nano test.txt'
       
