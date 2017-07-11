@@ -1,6 +1,14 @@
 version: '3'
 pipeline:
   
+  deploy:
+    image: appleboy/drone-ssh
+    host: sindrenerdal.no
+    username: dev
+    secrets: [SSH_PATH]
+    key_path: $SSH_PATH
+    environment:
+      - SSH_PATH=${SSH_PATH}
   #deploy:  
    # image: astasheep/ubuntu-sshd
    # secrets: [SSH_PATH]
@@ -8,15 +16,15 @@ pipeline:
    #   script:
     #    - chmod 600 $SSH_PATH
     #    - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
-  build:
-    dockerfile: Dockerfile.deploy
-    secrets: [SSH_PATH]
-    volumes:
-      - /etc/deployment:/etc/deployment
-    commands:
+  #build:
+    #dockerfile: Dockerfile.deploy
+   # secrets: [SSH_PATH]
+    #volumes:
+    #  - /etc/deployment:/etc/deployment
+    #commands:
       #- apt-get -yq update && apt-get -yqq install ssh
-      - ls -l
-      - ls -l /home/
+    #  - ls -l
+    #  - ls -l /home/
       #- mkdir .ssh
       #- echo $SSH_PATH
       #- cp -a $SSH_PATH .ssh/
