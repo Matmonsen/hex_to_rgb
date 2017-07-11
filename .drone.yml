@@ -7,9 +7,8 @@ pipeline:
       - /etc/deployment:/etc/deployment
     commands:
       - whoami 
-      - ls -l /home
-      - ls -l /home/deployUser
-      - ls -l /home/deployUser/.ssh
+      - pwd
+      - ls -l
       - cat $SSH_PATH >> /home/deployUser/.ssh/id_rsa.pub
       - ssh -i $SSH_PATH -o StrictHostKeyChecking=no dev@sindrenerdal.no 'nano test.txt'
       #- cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
