@@ -6,7 +6,7 @@ pipeline:
     volumes:
       - /etc/deployment:/etc/deployment
     commands:
-      - whoami
+      - whoami 
       - ls -l /home
       - ls -l /home/deployUser
       - ls -l /home/deployUser/.ssh
