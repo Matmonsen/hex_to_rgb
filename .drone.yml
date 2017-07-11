@@ -1,21 +1,18 @@
 version: '3'
 pipeline:
   
-  deploy:
-    image: appleboy/drone-ssh
-    host: sindrenerdal.no
-    username: dev
+
+  deploy:  
+    image: astasheep/ubuntu-sshd
     secrets: [SSH_PATH]
-    key_path: $SSH_PATH
-    environment:
-      - SSH_PATH=${SSH_PATH}
-  #deploy:  
-   # image: astasheep/ubuntu-sshd
-   # secrets: [SSH_PATH]
-   # bash:
-   #   script:
-    #    - chmod 600 $SSH_PATH
-    #    - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
+    bash:
+      script:
+        - adduser -h /home/deployUser -s /bin/bash -D -S deployUser
+        - passwd -d deployUser
+        - mkdir -p /home/deployUser/.ssh
+        - chmod 700 /home/deployUser/.ssh
+        - chown -R deployUser /home/deployUser/.ssh
+        - ssh -itt .$SSH_PATH dev@sindrenerdal.no 'bash -s' < echo "heia"
   #build:
     #dockerfile: Dockerfile.deploy
    # secrets: [SSH_PATH]
