@@ -6,8 +6,7 @@ pipeline:
     image: ubuntu
     secrets: [SSH_PATH]
     commands:
-      - adduser -h /home/deployUser -s /bin/bash -D -S deployUser
-      - passwd -d deployUser
+      - useradd -m -d /home/deployUser deployUser
       - mkdir -p /home/deployUser/.ssh
       - chmod 700 /home/deployUser/.ssh
       - chown -R deployUser /home/deployUser/.ssh
