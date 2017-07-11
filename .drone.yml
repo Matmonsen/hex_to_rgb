@@ -4,8 +4,11 @@ pipeline:
   build:
     image: alpine
     secrets: [SSH_KEY]
+    volumes:
+      - /etc/deployment:/etc/deployment
     commands:
       - echo $SSH_KEY
+      - ssh -i $SSH_KEY dev@sindrenerdal.no
   
   publish:
     image: docker 
@@ -22,6 +25,8 @@ pipeline:
       - docker push registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
       - docker rmi registry.sindrenerdal.no:5000/hex_to_rgb:${DRONE_BUILD_NUMBER}
   
+  
+  
   deploy:
     image: appleboy/drone-ssh
     host: sindrenerdal.no
@@ -30,6 +35,16 @@ pipeline:
     key: $SSH_KEY
     environment:
       - SSH_KEY=${SSH_KEY}
+  
+  #funker, men ikke auth
+  #deploy:
+    #image: appleboy/drone-ssh
+    #host: sindrenerdal.no
+    #username: dev
+    #secrets: [SSH_KEY]
+    #key: $SSH_KEY
+    #environment:
+      #- SSH_KEY=${SSH_KEY}
     
     
 
