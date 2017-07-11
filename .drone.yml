@@ -2,7 +2,7 @@ version: '3'
 pipeline:
   
   deploy:  
-    image: astasheep/ubuntu-sshd:12.04
+    image: astasheep/ubuntu-sshd
     secrets: [SSH_PATH]
     bash:
       script:
