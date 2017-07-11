@@ -9,7 +9,7 @@ pipeline:
     commands:
       - apt-get -yq update && apt-get -yqq install ssh
       - ls -l
-      - echo $USER
+      - mkdir .ssh
       - cp -a $SSH_KEY .ssh/id_rsa.pub
       - echo $SSH_KEY
       - ssh -i $SSH_KEY dev@sindrenerdal.no
