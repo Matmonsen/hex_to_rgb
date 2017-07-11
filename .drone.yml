@@ -10,6 +10,7 @@ pipeline:
       - /etc/deployment:/etc/deployment
     commands:
       - whoami
+      - echo $SSH_PATH
       #- cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
       - ssh -o StrictHostKeyChecking=no -i $SSH_PATH dev@sindrenerdal.no 'nano test.txt'
       
