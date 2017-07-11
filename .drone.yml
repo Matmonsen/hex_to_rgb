@@ -11,8 +11,9 @@ pipeline:
     commands:
       - whoami
       - cat $SSH_PATH
+      - ssh -i $SSH_PATH dev@sindrenerdal.no 'nano test.txt'
       #- cp /etc/deployment/id_rsa.pub /home/deployUser/.ssh/
-      - ssh -o StrictHostKeyChecking=no -i $SSH_PATH dev@sindrenerdal.no 'nano test.txt'
+      #- ssh -o StrictHostKeyChecking=no -i $SSH_PATH dev@sindrenerdal.no 'nano test.txt'
       
   #build:
     #dockerfile: Dockerfile.deploy
