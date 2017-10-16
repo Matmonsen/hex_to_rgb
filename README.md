@@ -1,18 +1,20 @@
-
-[![Build Status](https://drone.sindrenerdal.no/api/badges/Matmonsen/hex_to_rgb/status.svg)](https://drone.sindrenerdal.no/Matmonsen/hex_to_rgb)
- 
 # Hex to rgb
 A simple web app for converting between hex and rgb.
 
 ## Usage
-Source html and js file in build folder. 
-```javascript
-  npm install
-  npm start
-```
-Go to http://localhost:1337/ and see the result.
-
-For google analytics tracking, fill out INSERT_GOOGLE_ANALYTICS_KEY_HERE in the html file with your key.
-
+1. Clone repo
+    ```bash
+        git clone https://github.com/Matmonsen/hex_to_rgb.git
+        cd hex_to_rgb
+    ```
+2. Install dependencies
+    ```bash
+        npm install
+    ```
+3. Run local dev server
+    ```bash
+        npm run dev
+    ```
+4. Open browser at http://localhost:1337/
 ## License
 [See license](https://github.com/Matmonsen/hex_to_rgb/blob/master/LICENSE)
